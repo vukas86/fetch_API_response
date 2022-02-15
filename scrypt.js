@@ -2,6 +2,8 @@
 
 const btnSearch = document.querySelector(".button-42");
 const counContainer = document.querySelector(".container");
+const btnPicElement = document.querySelector(".btn");
+const imgElement = document.querySelector(".dogs");
 
 const renderCountry = function (data) {
   console.log(data);
@@ -36,3 +38,16 @@ btnSearch.addEventListener("click", function () {
       errorMsg(`Something went wrong 🙍: ${err.message}`);
     });
 });
+
+const getPic = async function () {
+  try {
+    const picture = await fetch("https://dog.ceo/api/breeds/image/random");
+    const data = await picture.json();
+
+    imgElement.src = `${data.message}`;
+  } catch (err) {
+    console.error(`Something is wrong!`);
+  }
+};
+
+btnPicElement.addEventListener("click", getPic);
